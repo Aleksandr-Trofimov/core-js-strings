@@ -483,8 +483,8 @@ function unbracketTag(str) {
  *   ],
  *   'info@gmail.com' => ['info@gmail.com']
  */
-function extractEmails(/* str */) {
-  throw new Error('Not implemented');
+function extractEmails(str) {
+  return str.split(';');
 }
 
 /**
@@ -503,9 +503,23 @@ function extractEmails(/* str */) {
  *    => 'NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm'
  *
  */
-function encodeToRot13(/* str */) {
-  throw new Error('Not implemented');
+function encodeToRot13(str) {
+  let newStr = '';
+  for (let i = 0; i < str.length; i += 1) {
+    if (str.charCodeAt(i) < 65 || str.charCodeAt(i) > 122) {
+      newStr += str[i];
+    } else if (
+      str.charCodeAt(i) < 78 ||
+      (str.charCodeAt(i) > 96 && str.charCodeAt(i) < 110)
+    ) {
+      newStr += String.fromCharCode(str.charCodeAt(i) + 13);
+    } else {
+      newStr += String.fromCharCode(str.charCodeAt(i) - 13);
+    }
+  }
+  return newStr;
 }
+encodeToRot13('Why did the chicken cross the road?');
 
 /**
  * Returns playid card id.
